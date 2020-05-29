@@ -1,6 +1,5 @@
 package ru.geekbraibs.main.site.at;
 
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
