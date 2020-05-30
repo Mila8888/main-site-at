@@ -2,74 +2,45 @@ package ru.geekbraibs.main.site.at;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
 import java.util.concurrent.TimeUnit;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.stream.Stream;
 
-@Disabled
+import static org.junit.jupiter.api.Assertions.*;
+
 public class NavigationTest extends BaseTest {
+    public int count = 0;
 
-    String header;
+    @ParameterizedTest
+    @MethodSource("navigation")
+    public void navigationPanelTest(String icon, String header, String word, String footer) {
 
-    @Test
-    void navigationPanelTest1() {
         driver.get(BASE_URL + "/career");
-        WebElement careerNavItemButton = driver.findElement(By.cssSelector("nav > a[href='/career']"));
-        careerNavItemButton.click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Карьера", header);
-        assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
-    }
-
-    @Test
-    void navigationPanelTest2() {
-        driver.get(BASE_URL + "/career");
-        driver.findElement(By.cssSelector("nav > a[href='/tests']")).click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Тесты", header);
-        assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
-    }
-
-    @Test
-    void navigationPanelTest3() {
-        driver.get(BASE_URL + "/career");
-        driver.findElement(By.cssSelector("nav.gb-left-menu__nav .svg-icon.icon-courses")).click();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div/div/button[*]")).click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Курсы", header);
-        assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
-    }
-
-    @Test
-    void navigationPanelTest4() {
-        driver.get(BASE_URL + "/career");
-
-        driver.findElement(By.cssSelector("nav > a[href='/events']")).click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Вебинары", header);
-        assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
-    }
-
-    @Test
-    void navigationPanelTest5() {
-        driver.get(BASE_URL + "/career");
-        driver.findElement(By.cssSelector("nav > a[href='/topics']")).click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Форум", header);
-        assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
-    }
-
-        @Test
-        void navigationPanelTest6() {
-        driver.get(BASE_URL + "/career");
-        driver.findElement(By.cssSelector("nav > a[href='/posts']")).click();
-        header = driver.findElement(By.className("gb-header__title")).getText();
-        assertEquals("Блог", header);
-            assertTrue(driver.findElement(By.cssSelector("footer.site-footer")).isDisplayed());
+        driver.findElement(By.cssSelector(icon)).click();
+        if(count == 2){
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            driver.findElement(By.xpath("//div/div/button[*]")).click();
         }
+        header = driver.findElement(By.className(header)).getText();
+        assertEquals(word, header);
+        assertTrue(driver.findElement(By.cssSelector(footer)).isDisplayed());
+        count++;
+    }
+
+    public static Stream<Arguments> navigation() {
+        return Stream.of(
+                Arguments.of("nav > a[href='/career']", "gb-header__title", "Карьера", "footer.site-footer"),
+                Arguments.of("nav > a[href='/tests']", "gb-header__title", "Тесты", "footer.site-footer"),
+                Arguments.of("nav.gb-left-menu__nav .svg-icon.icon-courses", "gb-header__title", "Курсы", "footer.site-footer"),
+                Arguments.of("nav > a[href='/events']", "gb-header__title", "Вебинары", "footer.site-footer"),
+                Arguments.of("nav > a[href='/topics']", "gb-header__title", "Форум", "footer.site-footer"),
+                Arguments.of("nav > a[href='/posts']", "gb-header__title", "Блог", "footer.site-footer")
+                );
+    }
 }
-
-
