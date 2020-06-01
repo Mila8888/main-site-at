@@ -2,8 +2,9 @@ package ru.geekbraibs.main.site.at;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.geekbraibs.main.site.at.base.BaseTest;
 
-public class Footer extends BaseTest{
+public class Footer extends BaseTest {
 
     WebElement facebook = driver.findElement(By.cssSelector("footer>* a.site-footer__icon[href*='facebook']"));
     WebElement vk = driver.findElement(By.cssSelector("footer>* a.site-footer__icon[href*='vk']"));

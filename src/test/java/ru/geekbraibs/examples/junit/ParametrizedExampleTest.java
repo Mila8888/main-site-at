@@ -1,14 +1,16 @@
-package ru.geekbraibs.main.site.at.junit;
+package ru.geekbraibs.examples.junit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
+@Disabled
 public class ParametrizedExampleTest {
 
     @ParameterizedTest

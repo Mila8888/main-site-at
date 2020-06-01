@@ -2,8 +2,9 @@ package ru.geekbraibs.main.site.at;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.geekbraibs.main.site.at.base.BaseTest;
 
-public class Header extends BaseTest{
+public class Header extends BaseTest {
 
     WebElement scan = driver.findElement(By.xpath("//li/a[@class='show-search-form']"));
     WebElement schedule = driver.findElement(By.xpath("//li[@class=\"gb-top-menu__item\"]/a[@class='schedule-opener js-schedule-opener']"));

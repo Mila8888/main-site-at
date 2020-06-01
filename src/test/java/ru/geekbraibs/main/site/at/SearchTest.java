@@ -1,15 +1,19 @@
 package ru.geekbraibs.main.site.at;
 
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.geekbraibs.main.site.at.base.BaseTest;
+
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 public class SearchTest extends BaseTest {
 
     int profCount;
@@ -20,7 +24,7 @@ public class SearchTest extends BaseTest {
     int testsCount;
 
     @Test
-    void searchJavaTest() {
+    public void searchJavaTest() {
         int professionsCount;
 
         driver.get(BASE_URL + "/courses");

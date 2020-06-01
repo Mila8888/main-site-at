@@ -1,5 +1,6 @@
-package ru.geekbraibs.main.site.at.junit;
+package ru.geekbraibs.examples.junit;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 public class AssertionsExmapleTest {
 
     @Test
