@@ -1,75 +1,31 @@
 package ru.geekbraibs.main.site.at;
 
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.jupiter.api.*;
 import ru.geekbraibs.main.site.at.base.BaseTest;
+import ru.geekbrains.main.site.at.pages.Page;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@Disabled
 public class SearchTest extends BaseTest {
 
-    int profCount;
-    int coursesCount;
-    int webinarsCount;
-    int blogsCount;
-    int forumsCount;
-    int testsCount;
+    @BeforeEach
+    public void Test() {
+        driver.get(BASE_URL + "/courses");
+    }
 
     @Test
-    public void searchJavaTest() {
-        int professionsCount;
 
-        driver.get(BASE_URL + "/courses");
-        driver.findElement(By.xpath("//div/div/button[*]")).click();
+    public void searchWordTest() {
+        new Page(driver)
+                .popUpClosed()
+                .openSearchButton()
+                .wordInput()
+                .waiting()
 
-        WebElement searchButton = driver.findElement(By.cssSelector("ul > li > .show-search-form"));
-        searchButton.click();
-
-        WebElement searchInput = driver.findElement(By.cssSelector(".search-panel__search-field"));
-        searchInput.sendKeys("java");
-
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ul.search-page-tabs")));
-
-        WebElement professionsTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='professions']"));
-        WebElement coursesTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='courses']"));
-        WebElement webinarsTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='webinars']"));
-        WebElement blogsTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='blogs']"));
-        WebElement forumsTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='forums']"));
-        WebElement testsTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='tests']"));
-        WebElement companiesTab = driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='companies']"));
-
-        assertTrue(professionsTab.isDisplayed());
-        assertTrue(coursesTab.isDisplayed());
-        assertTrue(webinarsTab.isDisplayed());
-        assertTrue(blogsTab.isDisplayed());
-        assertTrue(forumsTab.isDisplayed());
-        assertTrue(testsTab.isDisplayed());
-        assertTrue(companiesTab.isDisplayed());
-
-        profCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='professions'] > span")).getText());
-        assertThat(profCount, greaterThanOrEqualTo(2));
-        coursesCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='courses'] > span")).getText());
-        assertThat(coursesCount, Matchers.greaterThan(15));
-        webinarsCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='webinars'] > span")).getText());
-        assertThat(webinarsCount, allOf(
-                greaterThan(180),
-                lessThan(300)
-        ));
-        blogsCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='blogs'] > span")).getText());
-        assertThat(blogsCount,greaterThan(300));
-        forumsCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='forums'] > span")).getText());
-        assertThat(forumsCount, not(equalTo(350)));
-        testsCount = Integer.parseInt(driver.findElement(By.cssSelector("ul.search-page-tabs > li > a[data-tab='tests'] > span")).getText());
-        assertThat(testsCount, not(equalTo(0)));
+                .profCountSearch()
+                .coursesCountSearch()
+                .webinarsCountSearch()
+                .blogsCountSearch()
+                .forumsCountSearch()
+                .testsCountSearch()
+                .companyVisibility();
     }
 }

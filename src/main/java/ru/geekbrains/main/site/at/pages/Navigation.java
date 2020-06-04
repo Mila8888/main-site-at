@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class NavigationTab extends BasePage {
+public class Navigation extends BasePage {
 
     @FindBy(css = "nav > a[href='/career']")
     private WebElement careerNavButton;
@@ -25,7 +25,7 @@ public class NavigationTab extends BasePage {
     @FindBy(css = "nav > a[href='/courses']")
     private WebElement coursesNavButton;
 
-    public NavigationTab(WebDriver driver) {
+    public Navigation(WebDriver driver) {
 
         super(driver);
     }
