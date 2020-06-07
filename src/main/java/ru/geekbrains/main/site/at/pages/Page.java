@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class Page extends BasePage {
     @FindBy(className = "gb-header__title")
     private WebElement pageHeader;
 
+    @Step("Check {expected} is header on page")
     public Page checkHeader(String expected) {
         assertEquals(expected, pageHeader.getText());
         return this;
@@ -23,6 +25,7 @@ public class Page extends BasePage {
     @FindBy(css = "footer.site-footer")
     private WebElement pageFooter;
 
+    @Step("Check footer on page")
     public Page checkFooter(String namePage) {
         assertTrue(pageFooter.isDisplayed());
         return this;
@@ -66,6 +69,7 @@ public class Page extends BasePage {
         navigationTab = new Navigation(driver);
     }
 
+    @Step("In navigation tab")
     public Navigation getNavigationTab() {
         return navigationTab;
     }

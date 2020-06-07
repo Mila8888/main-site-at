@@ -1,5 +1,6 @@
 package ru.geekbraibs.main.site.at;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.parallel.Execution;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 public class NavigationTest extends BaseTest {
 
     @BeforeEach
+    @Step("Open '/career' page")
     public void openSite() {
         driver.get(BASE_URL + "/career");
     }
