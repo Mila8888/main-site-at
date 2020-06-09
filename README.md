@@ -1,8 +1,8 @@
 ###Repository for Geekbrains lessons
 
-#####Author: Kulikova Lyudamila
+Author: Kulikova Lyudamila
 
-######Quick start:
+Quick start:
 
 clone this repository 
 ```
